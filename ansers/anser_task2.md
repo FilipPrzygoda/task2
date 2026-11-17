@@ -10,8 +10,8 @@ Repozytorium (6 commitów) przeskanowano przy użyciu narzędzia **Gitleaks**, c
 ## 2. Weryfikacja wyników
 - **Brak False Positive:** Gitleaks pominął zwykłe wystąpienia słowa `password` w kodzie (np. pustą zmienną `String password = "";` w `StudentController.java`).
 - **Weryfikacja klucza:**
-  - Polecenie `openssl rsa -check -noout` dla plików `deployment.key` oraz `deployment2.key` zwróciło komunikat `RSA key ok` – tylko ten klucz jest poprawny i możliwy do wykorzystania.
-  - W pliku `awscredentials.json` polecenie `openssl pkey -check` zwróciło błąd (`Could not find private key`), ponieważ autor nadpisał część klucza ciągami `SASDASDA` i nie da się go użyć.
+  - Polecenie `openssl rsa -check -noout` dla plików `deployment.key` oraz `deployment2.key` zwróciło komunikat `RSA key ok` - tylko ten klucz jest poprawny i możliwy do wykorzystania.
+  - Polecenie `openssl pkey -check` dla pliku `awscredentials.json` zwróciło błąd (`Could not find private key`), ponieważ autor nadpisał część klucza ciągami `SASDASDA` i nie da się go użyć.
 - **Dodatkowa weryfikacja ręczna (False Negative skanera):** Przeszukanie historii poleceniem `git grep -i "password"` wykazało zahardkodowane hasła do bazy danych w `application.properties` (`spring.datasource.password=h2` oraz `spring.database.password=1qaz@WSX`), których Gitleaks nie wykrył przez zbyt niską entropię.
 
 ## 3. Rekomendacja naprawcza
