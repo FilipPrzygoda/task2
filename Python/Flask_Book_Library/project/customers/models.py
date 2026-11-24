@@ -22,7 +22,12 @@ class Customer(db.Model):
         print("Getting: " + str(self),flush=True)
 
     def __repr__(self):
-        return f"Customer(ID: {self.id}, Name: {self.name}, City: {self.city}, Age: {self.age}, Pesel: {self.pesel}, Street: {self.street}, AppNo: {self.appNo})"
+        name = "*****" if self.name else "Empty or Invalid"
+        city = "*****" if self.city else "Empty or Invalid"
+        pesel = "*****" if self.pesel and len(str(self.pesel)) == 11 and str(self.pesel).isdigit() else "Empty or Invalid"
+        street = "*****" if self.street else "Empty or Invalid"
+        appNo = "*****" if self.appNo else "Empty or Invalid"
+        return f"Customer(ID: {self.id}, Name: {name}, City: {city}, Age: {self.age}, Pesel: {pesel}, Street: {street}, AppNo: {appNo})"
 
 
 with app.app_context():
